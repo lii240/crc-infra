@@ -1,2 +1,2 @@
 # crc
-Cloud Resume Challenge
+Infrastructure as Code for the Cloud Resume Challenge
