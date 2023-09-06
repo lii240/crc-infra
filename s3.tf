@@ -4,5 +4,6 @@ resource "aws_s3_bucket" "crc" {
   tags = {
     Name        = "CRC static website"
     Environment = "Dev"
+    Creator     = "LH"
   }
 }
