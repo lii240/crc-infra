@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "crc" {
 resource "aws_s3_bucket_website_configuration" "crc_config" {
   bucket = aws_s3_bucket.crc.id
 
-  index_document = {
+  index_document {
     suffix = "index.html"
   }
 }
@@ -20,5 +20,5 @@ resource "aws_s3_bucket_website_configuration" "crc_config" {
 #bucket policy to give read access to public
 resource "aws_s3_bucket_policy" "crc_bucket_policy" {
   bucket = aws_s3_bucket.crc.id
-  policy = templatefile("json/crc-bucket-policy.json")
+  policy = templatefile("json/crc-bucket-policy.json", { bucket = var.bucketName })
 }
