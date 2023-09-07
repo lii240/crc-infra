@@ -20,5 +20,21 @@ resource "aws_s3_bucket_website_configuration" "crc_config" {
 #bucket policy to give read access to public
 resource "aws_s3_bucket_policy" "crc_bucket_policy" {
   bucket = aws_s3_bucket.crc.id
-  policy = templatefile("json/crc-bucket-policy.json", { bucket = var.bucketName })
+  policy = data.aws_iam_policy_document.crc_allow_public_access.json
+}
+
+data "aws_iam_policy_document" "crc_allow_public_access" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket",
+    ]
+
+    resources = [aws_s3_bucket.crc.arn, "${aws_s3_bucket.crc.arn}/*",]
+  }
 }
