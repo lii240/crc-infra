@@ -32,7 +32,6 @@ data "aws_iam_policy_document" "crc_allow_public_access" {
 
     actions = [
       "s3:GetObject",
-      "s3:ListBucket",
     ]
 
     resources = [aws_s3_bucket.crc.arn, "${aws_s3_bucket.crc.arn}/*",]
